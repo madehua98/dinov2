@@ -10,8 +10,10 @@ train:
   dataset_path: RecursiveImageDataset:root=/mnt/madehua/fooddata/datacomp_food/extracted_shards1
   output_dir: /mnt/madehua/model/checkpoints/food_vitl14
   centering: sinkhorn_knopp
-  num_workers: 24
+  num_workers: 64
   OFFICIAL_EPOCH_LENGTH: 1250
+evaluation:
+  eval_period_iterations: 20000
 student:
   arch: vit_large
   patch_size: 14

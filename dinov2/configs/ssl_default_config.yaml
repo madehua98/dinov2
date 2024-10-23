@@ -116,7 +116,7 @@ crops:
   global_crops_size: 224 #original 224 -> 518 necessary for loading checkpoints, however, interpolation can be used to adapt the size
   local_crops_size: 98 #original 96 -> has to be divideable by 14
 evaluation:
-  eval_period_iterations: 1000 # original 12500, what better -> use 1000 for finetuning
+  eval_period_iterations: 10000000 # original 12500, what better -> use 1000 for finetuning
 # add a link to an /eval/training_iterations here, to continue with training to load the dino head weights as well, important: also set the start iterations!
 head:
   head_path:

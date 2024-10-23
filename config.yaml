@@ -59,13 +59,13 @@ ibot:
   head_nlayers: 3
   head_hidden_dim: 2048
 train:
-  batch_size_per_gpu: 32
-  dataset_path: RecursiveImageDataset:root=/mnt/madehua/fooddata/six_dataset_full.txt
-  output_dir: /home/madehua/code/dinov2
+  batch_size_per_gpu: 16
+  dataset_path: RecursiveImageDataset:root=six_dataset_full.txt
+  output_dir: /home/data_llm/madehua/dinov2
   saveckp_freq: 20
   seed: 0
-  num_workers: 24
-  OFFICIAL_EPOCH_LENGTH: 8000
+  num_workers: 64
+  OFFICIAL_EPOCH_LENGTH: 16000
   cache_dataset: true
   centering: sinkhorn_knopp
 student:
@@ -94,7 +94,7 @@ optim:
   weight_decay: 0.04
   weight_decay_end: 0.2
   base_lr: 0.0002
-  lr: 8.660254037844386e-05
+  lr: 6.123724356957945e-05
   warmup_epochs: 2
   min_lr: 1.0e-06
   clip_grad: 3.0
@@ -115,6 +115,6 @@ crops:
   global_crops_size: 224
   local_crops_size: 98
 evaluation:
-  eval_period_iterations: 1000
+  eval_period_iterations: 20000
 head:
   head_path: null

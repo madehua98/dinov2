@@ -8,4 +8,6 @@ iopath
 xformers==0.0.18
 submitit
 --extra-index-url https://pypi.nvidia.com
+numpy==1.23.5
+wandb
 cuml-cu11

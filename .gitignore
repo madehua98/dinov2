@@ -12,3 +12,4 @@ wandb/
 *.log
 logs/
 eval/
+six_dataset_full.txt

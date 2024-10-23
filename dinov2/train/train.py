@@ -183,7 +183,7 @@ def do_train(cfg, model, resume=False): # change resume to true?
 
     periodic_checkpointer = PeriodicCheckpointer(
         checkpointer,
-        period=OFFICIAL_EPOCH_LENGTH,
+        period=2 * OFFICIAL_EPOCH_LENGTH,
         max_iter=max_iter,
         max_to_keep=10,
     )
