@@ -15,6 +15,7 @@ from torch.utils.data import Sampler
 
 from .datasets import ImageNet, ImageNet22k
 from .datasets.CustomImageDataset import CustomImageDataset
+from .datasets.recursive_image_dataset import RecursiveImageDataset
 from .samplers import EpochSampler, InfiniteSampler, ShardedInfiniteSampler
 
 
@@ -64,6 +65,8 @@ def _parse_dataset_str(dataset_str: str):
         class_ = ImageNet22k
     elif name == "CustomImageDataset":
         class_ = CustomImageDataset
+    elif name == "RecursiveImageDataset":
+        class_ = RecursiveImageDataset
     else:
         raise ValueError(f'Unsupported dataset "{name}"')
 

@@ -6,9 +6,12 @@ ibot:
   separate_head: true
   head_n_prototypes: 131072
 train:
-  batch_size_per_gpu: 1 # standard is 32
-  dataset_path: CustomImageDataset:split=TRAIN:root=/home/ubuntu/example_image/tiling_previews_1024px_0mpp_2.0xdown_normal_heartcenter_munich:extra=/home/ubuntu/example_image/file_list.csv #ImageNet:split=TRAIN:root=/home/ubuntu/example_image/one_test_image:extra=/home/ubuntu/example_image/one_test_image # original is: ImageNet22k
+  batch_size_per_gpu: 24 # standard is 32
+  dataset_path: RecursiveImageDataset:root=/mnt/madehua/fooddata/datacomp_food/extracted_shards1
+  output_dir: /mnt/madehua/model/checkpoints/food_vitl14
   centering: sinkhorn_knopp
+  num_workers: 24
+  OFFICIAL_EPOCH_LENGTH: 1250
 student:
   arch: vit_large
   patch_size: 14
@@ -18,10 +21,10 @@ student:
 teacher:
   momentum_teacher: 0.994
 optim:
-  epochs: 500
+  epochs: 20
   weight_decay_end: 0.2
   base_lr: 2.0e-04  # learning rate for a batch size of 1024
-  warmup_epochs: 80
+  warmup_epochs: 2
   layerwise_decay: 1.0
 crops:
   local_crops_size: 98

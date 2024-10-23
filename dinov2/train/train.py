@@ -183,9 +183,9 @@ def do_train(cfg, model, resume=False): # change resume to true?
 
     periodic_checkpointer = PeriodicCheckpointer(
         checkpointer,
-        period=3 * OFFICIAL_EPOCH_LENGTH,
+        period=OFFICIAL_EPOCH_LENGTH,
         max_iter=max_iter,
-        max_to_keep=3,
+        max_to_keep=10,
     )
 
     # setup data preprocessing
@@ -216,6 +216,7 @@ def do_train(cfg, model, resume=False): # change resume to true?
     )
 
     # setup data loader
+
 
     dataset = make_dataset(
         dataset_str=cfg.train.dataset_path,
@@ -331,7 +332,7 @@ def do_train(cfg, model, resume=False): # change resume to true?
     metric_logger.synchronize_between_processes()
     return {k: meter.global_avg for k, meter in metric_logger.meters.items()}
 
-
+    
 def main(args):
     cfg = setup(args)
 

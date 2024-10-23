@@ -7,5 +7,8 @@ dist/
 **/.ipynb_checkpoints/**
 
 *.swp
-
+wandb/
 .vscode/
+*.log
+logs/
+eval/

@@ -91,14 +91,14 @@ def get_downloaded_dino_interpolated():
 
 # this function is exactly the same as the one above, but with registers
 def get_downloaded_dino_reg_interpolated():
-    model = torch.hub.load('facebookresearch/dinov2', 'dinov2_vits14_reg')
+    model = torch.hub.load('facebookresearch/dinov2', 'dinov2_vitl14_reg')
     #model=torch.hub.load('facebookresearch/dinov2', 'dinov2_vitg14_reg')
     input_tensor = model.pos_embed
     tensor_corr_shape = interpolate_pos_encoding(input_tensor, 16, 16)
     pos_embed = nn.Parameter(torch.zeros(1, 257))
     pos_embed.data = tensor_corr_shape
     model.pos_embed = pos_embed
-
+    print("Using registered model")
     return model
 
 # This function allows to continue finetuning in case of the training breaking or also just if more experiments should be conducted.
@@ -152,7 +152,8 @@ class SSLMetaArch(nn.Module):
         # This is commented out, because it was easier to create the model using the torch.hub, as this already returns the pretrained version with the correct architecture.
         #student_backbone, teacher_backbone, embed_dim = build_model_from_cfg(cfg)
         #embed_dim = 1536 # use for vit_g
-        embed_dim = 384 # use for vit_s
+        embed_dim = 1024 # use for vit_l
+        #embed_dim = 384 # use for vit_s
 
         # use for cut loading downloaded weights
         '''
@@ -161,14 +162,17 @@ class SSLMetaArch(nn.Module):
         '''
 
         # use for interpolated loading downloaded weights
+        '''
         student_backbone = get_downloaded_dino_interpolated()
         teacher_backbone = get_downloaded_dino_interpolated()
+        '''
+
 
         # use for interpolated loading downloaded weights with registern
-        '''
+
         student_backbone = get_downloaded_dino_reg_interpolated()
         teacher_backbone = get_downloaded_dino_reg_interpolated()
-        '''
+
 
         # use for continuation with finetuned weights, in this case the dino head weights also have to be set
         #student_backbone, teacher_backbone = get_dino_finetuned_downloaded(cfg, embed_dim)
